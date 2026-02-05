@@ -6,14 +6,14 @@
 <title>For Pamela 💖</title>
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --rose:#ff4fa3;
-  --gold:#ffd166;
-  --bg1:#140018;
-  --bg2:#2a0033;
-  --glass:rgba(255,255,255,.12);
+  --pink1:#ffe0ef;
+  --pink2:#ffc1dc;
+  --accent:#ff5fa2;
+  --card:#ffffffcc;
 }
 
 *{box-sizing:border-box}
@@ -23,41 +23,42 @@ body{
   min-height:100svh;
   display:grid;
   place-items:center;
-  background:linear-gradient(135deg,var(--bg1),var(--bg2));
-  font-family:'Segoe UI',system-ui,sans-serif;
+  background:radial-gradient(circle at top,var(--pink1),var(--pink2));
+  font-family:'Quicksand',system-ui,sans-serif;
   overflow:hidden;
-  color:white;
+  color:#7a003d;
 }
 
-#confettiCanvas{position:fixed;inset:0;pointer-events:none;z-index:999;}
+#confettiCanvas{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:999;
+}
 
 .card{
   width:min(720px,92vw);
-  padding:36px 30px;
-  background:var(--glass);
-  backdrop-filter:blur(18px);
-  border-radius:30px;
+  padding:36px 28px;
+  background:var(--card);
+  backdrop-filter:blur(10px);
+  border-radius:28px;
   text-align:center;
-  box-shadow:0 0 60px rgba(255,79,163,.35);
-  animation:cardIn .9s ease;
+  box-shadow:0 20px 60px rgba(255,95,162,.25);
+  animation:cardIn .7s ease;
 }
 
 @keyframes cardIn{
-  from{transform:translateY(40px) scale(.9);opacity:0}
+  from{transform:translateY(20px) scale(.95);opacity:0}
   to{transform:none;opacity:1}
 }
 
 h1{
   font-size:clamp(28px,4vw,48px);
-  background:linear-gradient(90deg,var(--rose),var(--gold),var(--rose));
+  background:linear-gradient(45deg,#ff5fa2,#ff93c7);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-  animation:shine 4s linear infinite;
-}
-
-@keyframes shine{
-  0%{background-position:0%}
-  100%{background-position:200%}
+  margin:0 0 20px;
+  text-shadow:0 6px 18px rgba(255,95,162,.3);
 }
 
 .button-zone{
@@ -78,13 +79,13 @@ button{
   border:none;
   cursor:pointer;
   transition:.15s ease;
-  box-shadow:0 0 20px rgba(255,79,163,.6);
+  box-shadow:0 10px 24px rgba(255,95,162,.35);
 }
 
 #yesBtn{
   left:18%;
-  background:linear-gradient(45deg,var(--rose),var(--gold));
-  color:#220015;
+  background:linear-gradient(45deg,#ff5fa2,#ff9fd0);
+  color:white;
 }
 
 #yesBtn:hover{transform:translateY(-50%) scale(1.15)}
@@ -92,19 +93,19 @@ button{
 #noBtn{
   left:62%;
   background:#fff;
-  color:#ff4fa3;
+  color:#ff5fa2;
 }
 
-.hint{margin-top:12px;opacity:.7}
+.hint{margin-top:12px;font-size:14px;opacity:.7}
 
 .result{display:none;margin-top:20px;animation:pop .4s ease;}
 
-@keyframes pop{from{transform:scale(.8);opacity:0}to{transform:none;opacity:1}}
+@keyframes pop{from{transform:scale(.85);opacity:0}to{transform:none;opacity:1}}
 
 .loveMessage{
-  font-size:1.2rem;
+  font-size:1.15rem;
   margin-top:12px;
-  color:#ffd1ea;
+  color:#c0005b;
 }
 
 .heart{
@@ -136,14 +137,14 @@ button{
 
   <section class="result" id="result">
     <h2>YAY!!! 🎉💞</h2>
-    <img src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif" width="260">
+    <img src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif" width="260" alt="Celebration">
     <p class="loveMessage" id="loveMessage"></p>
   </section>
 </main>
 
-<!-- 🔊 PASTE YOUR *DIRECT MP3 LINK* FROM PIXABAY BELOW -->
+<!-- 🎵 Local MP3 file (GitHub Pages friendly) -->
 <audio id="music" preload="auto">
-  <source src="<source src="music/hitslab-love-love-story-music-270165.mp3" type="audio/mpeg">
+  <source src="hitslab-love-love-story-music-270165.mp3" type="audio/mpeg">
 </audio>
 
 <script>
@@ -155,83 +156,89 @@ const hint = document.getElementById("hint");
 const question = document.getElementById("question");
 const loveMessage = document.getElementById("loveMessage");
 const music = document.getElementById("music");
-const card = document.getElementById("card");
 
 const messages = [
-  "Pamela, you make my world brighter every single day 💫",
-  "I’m so lucky to have you in my life, Pamela 💖",
-  "You’re my favorite person, today and always 🥰",
-  "Every moment with you feels special, Pamela ✨",
+  "Babe, you make my world brighter every single day 💫",
+  "I’m so lucky to have you in my life, love 💖",
+  "You’re my favourite person, today and always 🥰",
+  "Every moment with you feels special ✨",
   "You + Me = Perfect ❤️"
 ];
 
 const confettiCanvas = document.getElementById("confettiCanvas");
 function resize(){
-  const dpr=Math.max(1,devicePixelRatio||1);
-  confettiCanvas.width=innerWidth*dpr;
-  confettiCanvas.height=innerHeight*dpr;
+  const dpr = Math.max(1, window.devicePixelRatio || 1);
+  confettiCanvas.width = innerWidth * dpr;
+  confettiCanvas.height = innerHeight * dpr;
 }
-resize();addEventListener("resize",resize);
+resize(); addEventListener("resize", resize);
 
 const confettiInstance = confetti.create(confettiCanvas,{resize:false,useWorker:true});
 
 function blast(){
- const end=Date.now()+1600;
- (function frame(){
-  confettiInstance({particleCount:12,spread:120,origin:{x:Math.random(),y:Math.random()*0.3}});
-  if(Date.now()<end)requestAnimationFrame(frame);
- })();
+  const end = Date.now() + 1600;
+  (function frame(){
+    confettiInstance({
+      particleCount:12,
+      spread:120,
+      origin:{x:Math.random(),y:Math.random()*0.3}
+    });
+    if(Date.now() < end) requestAnimationFrame(frame);
+  })();
 }
 
-let scale=1;
+let scale = 1;
 function grow(){
- scale=Math.min(2.4,scale+.14);
- yesBtn.style.transform=`translateY(-50%) scale(${scale})`;
+  scale = Math.min(2.4, scale + .14);
+  yesBtn.style.transform = `translateY(-50%) scale(${scale})`;
 }
 
 function clamp(n,min,max){return Math.max(min,Math.min(max,n));}
 
 function moveNo(px,py){
- const z=zone.getBoundingClientRect();
- const b=noBtn.getBoundingClientRect();
- let dx=(b.left+b.width/2)-px;
- let dy=(b.top+b.height/2)-py;
- let mag=Math.hypot(dx,dy)||1;dx/=mag;dy/=mag;
- let nl=(b.left-z.left)+dx*150;
- let nt=(b.top-z.top)+dy*150;
- noBtn.style.left=clamp(nl,0,z.width-b.width)+"px";
- noBtn.style.top=clamp(nt,0,z.height-b.height)+"px";
- grow();
+  const z = zone.getBoundingClientRect();
+  const b = noBtn.getBoundingClientRect();
+  let dx = (b.left + b.width/2) - px;
+  let dy = (b.top + b.height/2) - py;
+  let mag = Math.hypot(dx,dy) || 1;
+  dx/=mag; dy/=mag;
+  let nl = (b.left - z.left) + dx*150;
+  let nt = (b.top - z.top) + dy*150;
+  noBtn.style.left = clamp(nl,0,z.width-b.width) + "px";
+  noBtn.style.top  = clamp(nt,0,z.height-b.height) + "px";
+  grow();
 }
 
-zone.addEventListener("pointermove",e=>{
- const b=noBtn.getBoundingClientRect();
- const d=Math.hypot((b.left+b.width/2)-e.clientX,(b.top+b.height/2)-e.clientY);
- if(d<140)moveNo(e.clientX,e.clientY);
+zone.addEventListener("pointermove", e=>{
+  const b = noBtn.getBoundingClientRect();
+  const d = Math.hypot(
+    (b.left + b.width/2) - e.clientX,
+    (b.top  + b.height/2) - e.clientY
+  );
+  if(d < 140) moveNo(e.clientX, e.clientY);
 });
 
-yesBtn.onclick=()=>{
- zone.style.display="none";
- hint.style.display="none";
- question.style.display="none";
- result.style.display="block";
- loveMessage.textContent = messages[Math.floor(Math.random()*messages.length)];
- blast();
- music.play().catch(()=>{});
+yesBtn.onclick = () => {
+  zone.style.display = "none";
+  hint.style.display = "none";
+  question.style.display = "none";
+  result.style.display = "block";
+  loveMessage.textContent = messages[Math.floor(Math.random()*messages.length)];
+  blast();
+  music.play().catch(()=>{});
 };
 
 // Floating hearts
 setInterval(()=>{
- const h=document.createElement("div");
- h.className="heart";
- h.textContent=Math.random()>.5?"💖":"✨";
- h.style.left=Math.random()*100+"vw";
- h.style.animationDuration=(6+Math.random()*6)+"s";
- h.style.fontSize=(16+Math.random()*28)+"px";
- document.body.appendChild(h);
- setTimeout(()=>h.remove(),12000);
+  const h = document.createElement("div");
+  h.className="heart";
+  h.textContent = Math.random() > .5 ? "💖" : "✨";
+  h.style.left = Math.random()*100 + "vw";
+  h.style.animationDuration = (6+Math.random()*6)+"s";
+  h.style.fontSize = (16+Math.random()*28)+"px";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),12000);
 },500);
 </script>
 </body>
 </html>
-

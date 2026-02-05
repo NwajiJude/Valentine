@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Be My Valentine 💖</title>
+<title>For Pamela 💖</title>
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
@@ -60,17 +60,6 @@ h1{
   100%{background-position:200%}
 }
 
-input{
-  padding:14px 20px;
-  border-radius:999px;
-  border:none;
-  outline:none;
-  width:70%;
-  text-align:center;
-  margin-bottom:20px;
-  font-size:16px;
-}
-
 .button-zone{
   position:relative;
   width:min(520px,92%);
@@ -112,6 +101,12 @@ button{
 
 @keyframes pop{from{transform:scale(.8);opacity:0}to{transform:none;opacity:1}}
 
+.loveMessage{
+  font-size:1.2rem;
+  margin-top:12px;
+  color:#ffd1ea;
+}
+
 .heart{
   position:fixed;
   font-size:20px;
@@ -129,9 +124,8 @@ button{
 <body>
 <canvas id="confettiCanvas"></canvas>
 
-<main class="card">
-  <input id="nameInput" placeholder="Enter your name 💌">
-  <h1 id="question">Will you be my Valentine? 💖</h1>
+<main class="card" id="card">
+  <h1 id="question">Pamela, will you be my Valentine? 💖</h1>
 
   <section class="button-zone" id="zone">
     <button id="yesBtn">Yes 💘</button>
@@ -143,31 +137,43 @@ button{
   <section class="result" id="result">
     <h2>YAY!!! 🎉💞</h2>
     <img src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif" width="260">
-    <p>Tap anywhere if music didn’t start 🎵</p>
+    <p class="loveMessage" id="loveMessage"></p>
   </section>
 </main>
 
+<!-- 🔊 PASTE YOUR *DIRECT MP3 LINK* FROM PIXABAY BELOW -->
 <audio id="music" preload="auto">
-  <source src="<a href="https://">Music by <a href="https://pixabay.com/users/nastelbom-48128234/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=466198">Dmitrii Spis</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=466198">Pixabay</a></a>" type="audio/mpeg">
+  <source src="PASTE_DIRECT_MP3_LINK_HERE.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-const zone=document.getElementById("zone");
-const yesBtn=document.getElementById("yesBtn");
-const noBtn=document.getElementById("noBtn");
-const result=document.getElementById("result");
-const hint=document.getElementById("hint");
-const nameInput=document.getElementById("nameInput");
-const question=document.getElementById("question");
-const music=document.getElementById("music");
+const zone = document.getElementById("zone");
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const result = document.getElementById("result");
+const hint = document.getElementById("hint");
+const question = document.getElementById("question");
+const loveMessage = document.getElementById("loveMessage");
+const music = document.getElementById("music");
+const card = document.getElementById("card");
 
-nameInput.oninput=()=>question.textContent=`${nameInput.value||"You"}, will you be my Valentine? 💖`;
+const messages = [
+  "Pamela, you make my world brighter every single day 💫",
+  "I’m so lucky to have you in my life, Pamela 💖",
+  "You’re my favorite person, today and always 🥰",
+  "Every moment with you feels special, Pamela ✨",
+  "You + Me = Perfect ❤️"
+];
 
-const confettiCanvas=document.getElementById("confettiCanvas");
-function resize(){const dpr=Math.max(1,devicePixelRatio||1);confettiCanvas.width=innerWidth*dpr;confettiCanvas.height=innerHeight*dpr;}
+const confettiCanvas = document.getElementById("confettiCanvas");
+function resize(){
+  const dpr=Math.max(1,devicePixelRatio||1);
+  confettiCanvas.width=innerWidth*dpr;
+  confettiCanvas.height=innerHeight*dpr;
+}
 resize();addEventListener("resize",resize);
 
-const confettiInstance=confetti.create(confettiCanvas,{resize:false,useWorker:true});
+const confettiInstance = confetti.create(confettiCanvas,{resize:false,useWorker:true});
 
 function blast(){
  const end=Date.now()+1600;
@@ -178,7 +184,10 @@ function blast(){
 }
 
 let scale=1;
-function grow(){scale=Math.min(2.4,scale+.14);yesBtn.style.transform=`translateY(-50%) scale(${scale})`;}
+function grow(){
+ scale=Math.min(2.4,scale+.14);
+ yesBtn.style.transform=`translateY(-50%) scale(${scale})`;
+}
 
 function clamp(n,min,max){return Math.max(min,Math.min(max,n));}
 
@@ -201,19 +210,15 @@ zone.addEventListener("pointermove",e=>{
  if(d<140)moveNo(e.clientX,e.clientY);
 });
 
-function tryPlay(){
- music.play().catch(()=>{});
-}
-
 yesBtn.onclick=()=>{
  zone.style.display="none";
  hint.style.display="none";
+ question.style.display="none";
  result.style.display="block";
+ loveMessage.textContent = messages[Math.floor(Math.random()*messages.length)];
  blast();
- tryPlay();
+ music.play().catch(()=>{});
 };
-
-document.body.addEventListener("click",tryPlay,{once:true});
 
 // Floating hearts
 setInterval(()=>{
@@ -229,4 +234,3 @@ setInterval(()=>{
 </script>
 </body>
 </html>
-

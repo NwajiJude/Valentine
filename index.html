@@ -6,15 +6,14 @@
 <title>For Pamela 💖</title>
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --blush:#ffe6f2;
-  --pink:#ffd1e8;
-  --accent:#ff77b7;
-  --gold:#f7c873;
-  --card:#ffffffdd;
+  --pink1:#ffe0ef;
+  --pink2:#ffc1dc;
+  --accent:#ff5fa2;
+  --card:#ffffffcc;
 }
 
 *{box-sizing:border-box}
@@ -24,11 +23,10 @@ body{
   min-height:100svh;
   display:grid;
   place-items:center;
-  background:
-    radial-gradient(circle at top, #fff6fb, var(--pink), #ffcce4);
+  background:radial-gradient(circle at top,var(--pink1),var(--pink2));
   font-family:'Quicksand',system-ui,sans-serif;
   overflow:hidden;
-  color:#7a0040;
+  color:#7a003d;
 }
 
 #confettiCanvas{
@@ -40,30 +38,27 @@ body{
 
 .card{
   width:min(720px,92vw);
-  padding:38px 30px;
+  padding:36px 28px;
   background:var(--card);
-  backdrop-filter:blur(12px);
-  border-radius:40px;
+  backdrop-filter:blur(10px);
+  border-radius:28px;
   text-align:center;
-  box-shadow:
-    0 25px 60px rgba(255,119,183,.25),
-    inset 0 0 0 2px rgba(255,255,255,.6);
-  animation:cardIn .9s ease;
+  box-shadow:0 20px 60px rgba(255,95,162,.25);
+  animation:cardIn .7s ease;
 }
 
 @keyframes cardIn{
-  from{transform:translateY(30px) scale(.95);opacity:0}
+  from{transform:translateY(20px) scale(.95);opacity:0}
   to{transform:none;opacity:1}
 }
 
 h1{
-  font-family:'Playfair Display',serif;
   font-size:clamp(28px,4vw,48px);
-  background:linear-gradient(45deg,var(--accent),var(--gold),var(--accent));
+  background:linear-gradient(45deg,#ff5fa2,#ff93c7);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-  margin:0 0 24px;
-  text-shadow:0 8px 22px rgba(255,119,183,.35);
+  margin:0 0 20px;
+  text-shadow:0 6px 18px rgba(255,95,162,.3);
 }
 
 .button-zone{
@@ -77,67 +72,52 @@ button{
   position:absolute;
   top:50%;
   transform:translateY(-50%);
-  padding:18px 34px;
+  padding:16px 30px;
   font-size:18px;
   font-weight:700;
   border-radius:999px;
   border:none;
   cursor:pointer;
-  transition:.18s ease;
-  box-shadow:0 12px 30px rgba(255,119,183,.4);
+  transition:.15s ease;
+  box-shadow:0 10px 24px rgba(255,95,162,.35);
 }
 
 #yesBtn{
-  left:16%;
-  background:linear-gradient(45deg,var(--accent),#ffb3dc);
+  left:18%;
+  background:linear-gradient(45deg,#ff5fa2,#ff9fd0);
   color:white;
 }
 
-#yesBtn:hover{
-  transform:translateY(-50%) scale(1.18);
-  box-shadow:0 16px 36px rgba(255,119,183,.6);
-}
+#yesBtn:hover{transform:translateY(-50%) scale(1.15)}
 
 #noBtn{
   left:62%;
-  background:white;
-  color:var(--accent);
+  background:#fff;
+  color:#ff5fa2;
 }
 
-.hint{
-  margin-top:12px;
-  font-size:14px;
-  opacity:.7;
-}
+.hint{margin-top:12px;font-size:14px;opacity:.7}
 
-.result{
-  display:none;
-  margin-top:20px;
-  animation:pop .45s ease;
-}
+.result{display:none;margin-top:20px;animation:pop .4s ease;}
 
-@keyframes pop{
-  from{transform:scale(.8);opacity:0}
-  to{transform:none;opacity:1}
-}
+@keyframes pop{from{transform:scale(.85);opacity:0}to{transform:none;opacity:1}}
 
 .loveMessage{
-  font-family:'Playfair Display',serif;
-  font-size:1.25rem;
-  margin-top:14px;
-  color:#b00063;
+  font-size:1.15rem;
+  margin-top:12px;
+  color:#c0005b;
 }
 
 .heart{
   position:fixed;
-  font-size:22px;
+  font-size:20px;
   animation:floatUp 10s linear infinite;
-  opacity:.75;
+  opacity:.7;
 }
 
 @keyframes floatUp{
   from{transform:translateY(110vh) scale(.6)}
-  to{transform:translateY(-10vh) scale(1.3)}
+  to{transform:translateY(-10vh) scale(1.2)}
 }
 </style>
 </head>
@@ -156,19 +136,15 @@ button{
   <div class="hint" id="hint">No seems a little shy… 😏</div>
 
   <section class="result" id="result">
-    <h2 style="font-family:'Playfair Display',serif;">YAY!!! 🎉💞</h2>
-    <!-- ✨ NEW ELEGANT ROMANTIC GIF -->
-    <img 
-      src="https://giphy.com/embed/3gvmxCCK0V2OMvUkVq" 
-      width="260" 
-      alt="Romantic celebration">
+    <h2>YAY!!! 🎉💞</h2>
+    <img src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif" width="260" alt="Celebration">
     <p class="loveMessage" id="loveMessage"></p>
   </section>
 </main>
 
-<!-- 🎵 Local MP3 for GitHub Pages -->
+<!-- 🎵 Local MP3 file (GitHub Pages friendly) -->
 <audio id="music" preload="auto">
-  <source src="hitslab-love-love-story-music-270165.mp3.mp3" type="audio/mpeg">
+  <source src="hitslab-love-love-story-music-270165.mp3" type="audio/mpeg">
 </audio>
 
 <script>
@@ -182,11 +158,11 @@ const loveMessage = document.getElementById("loveMessage");
 const music = document.getElementById("music");
 
 const messages = [
-  "Pamela, you make my world softer, sweeter, and brighter 💗",
-  "Every version of my future looks better with you in it ✨",
-  "You’re my favorite hello and my hardest goodbye 🥰",
-  "Life feels like a fairytale with you, Pamela 💫",
-  "You + Me = A love story I never want to end 💕"
+  "Pamela, you make my world brighter every single day 💫",
+  "I’m so lucky to have you in my life, Pamela 💖",
+  "You’re my favorite person, today and always 🥰",
+  "Every moment with you feels special, Pamela ✨",
+  "You + Me = Perfect ❤️"
 ];
 
 const confettiCanvas = document.getElementById("confettiCanvas");
@@ -203,8 +179,8 @@ function blast(){
   const end = Date.now() + 1600;
   (function frame(){
     confettiInstance({
-      particleCount:14,
-      spread:130,
+      particleCount:12,
+      spread:120,
       origin:{x:Math.random(),y:Math.random()*0.3}
     });
     if(Date.now() < end) requestAnimationFrame(frame);
@@ -252,17 +228,17 @@ yesBtn.onclick = () => {
   music.play().catch(()=>{});
 };
 
-// Floating hearts & sparkles
+// Floating hearts
 setInterval(()=>{
   const h = document.createElement("div");
   h.className="heart";
   h.textContent = Math.random() > .5 ? "💖" : "✨";
   h.style.left = Math.random()*100 + "vw";
   h.style.animationDuration = (6+Math.random()*6)+"s";
-  h.style.fontSize = (18+Math.random()*30)+"px";
+  h.style.fontSize = (16+Math.random()*28)+"px";
   document.body.appendChild(h);
   setTimeout(()=>h.remove(),12000);
-},450);
+},500);
 </script>
 </body>
 </html>
